@@ -77,3 +77,8 @@ if (isUserConnected()){
 
     </body>
     </html>
+<?php
+if (isset($_POST["submit"])){
+    connectUser($_POST["email"], $_POST["password"]);
+}
+?>

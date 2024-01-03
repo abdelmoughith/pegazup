@@ -7,6 +7,13 @@ class Controller
     private $db_name = "pegazup";
     private $conn;
 
+
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
+
     public function __construct() {
         // Create a connection
         $this->conn = new mysqli($this->db_server, $this->db_user, $this->db_pass, $this->db_name);
@@ -27,11 +34,11 @@ class Controller
 
         // Bind parameters
         $stmt->bind_param("sssis",
-            $person->fname,
-            $person->lname,
-                $person->email,
-                $person->age,
-                $person->password
+            $person->getFname(),
+            $person->getLname(),
+                $person->getEmail(),
+                $person->getAge(),
+                $person->getPassword()
         );
 
         // Execute the statement
@@ -49,47 +56,31 @@ class Controller
     }
 
     public function getPersonByEmail($email) {
-        $sql = "SELECT * FROM people WHERE email = ?";
-        $stmt = $this->conn->prepare($sql);
-
-        // Bind parameters
-        $stmt->bind_param("s", $email);
-
-        // Execute the statement
-        $stmt->execute();
-
-        // Get the result
-        $result = $stmt->get_result();
-
-        // Fetch the data as an associative array
-        $person = $result->fetch_assoc();
-
-        // Close the statement
-        $stmt->close();
-
-        // Output the person data (you might want to return it instead)
-        return $person ;
+        require_once "Person.php";
+        $sql = "SELECT * FROM people WHERE email = '$email'";
+        $result = mysqli_query($this->conn, $sql);
+        if (mysqli_num_rows($result)){
+            $row = mysqli_fetch_assoc($result);
+            $person = new Person(
+                $row['fname'],
+                $row['lname'],
+                $row['email'],
+                $row['age'],
+                $row['password'],
+                $row['inscription']
+            );
+            $person->setId($row['id']);
+            return $person;
+        }
+        return null;
     }
 
-    public function updatePerson($person) {
-        $sql = "UPDATE people SET name = ?, age = ?, gender = ? WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-
-        // Bind parameters
-        $stmt->bind_param("sisi", $name, $age, $gender, $id);
-
-        // Execute the statement
-        $result = $stmt->execute();
-
-        // Check for success
-        if ($result) {
-            echo "Person updated successfully.";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-        // Close the statement
-        $stmt->close();
+    public function updatePersonByEmail($email, $person) {
+        $sql = "UPDATE people SET name = ?, age = ?, gender = ? WHERE email = ?";
+    }
+    public function updatePersonInscriptionByEmail($email, $inscription) {
+        $sql = "UPDATE people SET inscription = '$inscription' WHERE email = '$email'";
+        mysqli_query($this->conn, $sql);
     }
 
     public function deletePerson($id) {

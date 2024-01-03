@@ -54,7 +54,7 @@
                                     <li><a href="index.php">Home</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="courses.html">Courses</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
+                                    <li><a href="pricing.php">Pricing</a></li>
                                     <li><a href="gallery.html">Gallery</a></li>
                                     <li><a href="blog.html">Blog</a>
                                         <ul class="submenu">
@@ -72,7 +72,7 @@
                         include "config.php";
                         if (isUserConnected()){
                             echo '<div class="header-btns d-none d-lg-block f-right">
-                                '.$_SESSION["fname"].'
+                                <h2>'.$_SESSION["fname"].'</h2>
                             </div>';
                         }else{
                             echo '
@@ -331,7 +331,7 @@
                                         <p>Month to mouth</p>
                                     </div>
                                 </div>
-                                <a href="#" class="border-btn border-btn2">Join Now</a>
+                                <a href="inscription1.php" class="border-btn border-btn2">Join Now</a>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@
                                         <p>Month to mouth</p>
                                     </div>
                                 </div>
-                                <a href="#" class="border-btn border-btn2">Join Now</a>
+                                <a href="inscription2.php" class="border-btn border-btn2">Join Now</a>
                             </div>
                         </div>
                     </div>
@@ -439,7 +439,7 @@
                                         <p>Month to mouth</p>
                                     </div>
                                 </div>
-                                <a href="#" class="border-btn border-btn2">Join Now</a>
+                                <a href="inscription3.php" class="border-btn border-btn2">Join Now</a>
                             </div>
                         </div>
                     </div>
@@ -595,7 +595,7 @@
                                                     <li><a href="index.html">Home</a></li>
                                                     <li><a href="about.html">About</a></li>
                                                     <li><a href="courses.html">Courses</a></li>
-                                                    <li><a href="pricing.html">Pricing</a></li>
+                                                    <li><a href="pricing.php">Pricing</a></li>
                                                     <li><a href="gallery.html">Gallery</a></li>
                                                     <li><a href="contact.html">Contact</a></li>
                                                 </ul>
