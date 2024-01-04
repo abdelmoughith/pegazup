@@ -26,33 +26,17 @@ class Controller
 
     //CREATE
     public function createperson($person) {
+        //$person = new Person();
+        $fname = $person->getFname();
+        $lname = $person->getLname();
+        $email = $person->getEmail();
+        $age = $person->getAge();
+        $password = $person->getPassword();
 
-        $sql = "INSERT INTO people (fname, lname, email, age, password)
-        VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO people(fname, lname, email, age, password)
+        VALUES ('$fname', '$lname', '$email', '$age', '$password')";
 
-        $stmt = $this->conn->prepare($sql);
-
-        // Bind parameters
-        $stmt->bind_param("sssis",
-            $person->getFname(),
-            $person->getLname(),
-                $person->getEmail(),
-                $person->getAge(),
-                $person->getPassword()
-        );
-
-        // Execute the statement
-        $result = $stmt->execute();
-
-        // Check for success
-        if ($result) {
-            echo "Account created successfully.";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-        // Close the statement
-        $stmt->close();
+        mysqli_query($this->conn, $sql);
     }
 
     public function getPersonByEmail($email) {
