@@ -66,14 +66,20 @@ if (isUserConnected()){
                         <div class="form-group">
                             <input type="number" name="age" class="form-control" placeholder="Age*" value="" />
                         </div>
-                        <!--
-                        <div class="form-group">
-                        <select class="form-control" name="school" aria-label="Default select example">
-                        <option selected>School*</option>
 
+                        <div class="form-group">
+                        <select name="city" class="form-control" name="city" aria-label="Default select example">
+                        <option selected>City*</option>
+                            <?php
+                            $control = new Controller();
+                            $cities = $control->getCities();
+                            foreach ($cities as $city){
+                            echo '<option value="'.$city.'">'.$city.'</option>';
+                            }
+                            ?>
                         </select>
                         </div>
-                        -->
+
 
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" placeholder="Password*" value="" />
@@ -83,11 +89,11 @@ if (isUserConnected()){
                         </div>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btnSubmit"
-                                   style="background-color: #C00" value="Create" />
+                                   style="background-color: #008fcc" value="Create" />
                         </div>
                         <div class="form-group">
                             <p>Have an account already?</p>
-                            <a href="/zacson/login.php"  style="color: #C00" class="ForgetPwd">log in now</a>
+                            <a href="login.php"  style="color: #008fcc" class="ForgetPwd">log in now</a>
                         </div>
                     </form>
                 </div>
@@ -102,7 +108,7 @@ if (isUserConnected()){
     </html>
 <?php
 if (isset($_POST["submit"])){
-    include("Controller.php");
+    //include("Controller.php");
 
     $fname = (string)$_POST["fname"];
     $lname = (string)$_POST["lname"];
@@ -121,8 +127,10 @@ if (isset($_POST["submit"])){
         (int)$_POST["age"],
         (int)$_POST["password"]
     );
-    $controller = new Controller();
-    $controller->createperson($person);
+    $person->setCity((string)$_POST["city"]);
+    $controls = new Controller();
+    $controls->createperson($person);
+
 
 }
 

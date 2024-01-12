@@ -60,11 +60,11 @@ if (isUserConnected()){
 
                         <div class="form-group">
                             <input type="submit" name="submit" class="btnSubmit"
-                                   style="background-color: #C00" value="Log in" />
+                                   style="background-color: #008fcc" value="Log in" />
                         </div>
                         <div class="form-group">
                             <p>Don't have account? Create one now</p>
-                            <a href="/zacson/signup.php"  style="color: #C00" class="ForgetPwd">Sign up now</a>
+                            <a href="signup.php"  style="color: #008fcc" class="ForgetPwd">Sign up now</a>
                         </div>
                     </form>
                 </div>
@@ -78,6 +78,7 @@ if (isUserConnected()){
     </body>
     </html>
 <?php
+
 if (isset($_POST["submit"])){
     connectUser($_POST["email"], $_POST["password"]);
 }

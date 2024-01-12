@@ -1,4 +1,16 @@
 <?php
+
+include("../config.php");
+if (!isUserConnected()) {
+    header('Location: ../login.php');
+}
+
+
+if (isset($_POST['submit'])){
+
+    $_SESSION['price'] = $_POST['price'];
+    header('Location: pay.php');
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,25 +22,15 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="ownstyle/priceItems.css" />
+    <link rel="stylesheet" href="../ownstyle/priceItems.css" />
 
 </head>
 <body>
 <!--NAVBAR-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.php">PEGAZUP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link active" href="#">Pricing</a>
-            <a class="nav-item nav-link disabled" href="#">ADMIN</a>
-        </div>
-    </div>
-</nav>
+<?php
+include "../navbar.php";
+nav();
+?>
 
 <!--PRICING-->
 <section class="pricing py-5">
@@ -53,7 +55,10 @@
                             <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>NULL</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary text-uppercase">Button</a>
+                            <form method="post">
+                                <input type="hidden" name="price" value="20">
+                                <input class="btn btn-primary text-uppercase" name="submit" type="submit" value="JOIN NOW"/>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -76,7 +81,10 @@
                             <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>NULL</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary text-uppercase">Button</a>
+                            <form method="post">
+                                <input type="hidden" name="price" value="40">
+                                <input class="btn btn-primary text-uppercase" name="submit" type="submit" value="JOIN NOW"/>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -100,7 +108,10 @@
                             <li><span class="fa-li"><i class="fas fa-check"></i></span>Monthly Status Reports</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary text-uppercase">Button</a>
+                            <form method="post">
+                                <input type="hidden" name="price" value="70">
+                                <input class="btn btn-primary text-uppercase" name="submit" type="submit" value="JOIN NOW"/>
+                            </form>
                         </div>
                     </div>
                 </div>

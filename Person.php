@@ -12,10 +12,11 @@ class Person{
     private string $paid_date;
     private string $expire_date;
     private int $coach_id;
+    private string $city;
 
 
 
-    public function __construct($fname=null, $lname=null, $email=null, $age=null, $password=null,$inscription=null)
+    public function __construct($fname=null, $lname=null, $email=null, $age=null, $password=null)
     {
         $this->fname = $fname;
         $this->lname = $lname;
@@ -23,7 +24,6 @@ class Person{
         $this->age = $age;
         //$this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->password = $password;
-        $this->inscription = $inscription;
     }
 
     public function getId(): int
@@ -116,15 +116,30 @@ class Person{
         $this->expire_date = $expire_date;
     }
 
-    public function getCoachId(): int
+    public function getCoachId(): ?int
     {
-        return $this->coach_id;
+        if ($this->coach_id != null){
+            return $this->coach_id;
+        }
+        return null;
+
     }
 
     public function setCoachId(int $coach_id): void
     {
         $this->coach_id = $coach_id;
     }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
 
 
 }

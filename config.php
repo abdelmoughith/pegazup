@@ -21,7 +21,14 @@ function connectUser($email, $password){
             $_SESSION['lname'] = $person->getLname();
             $_SESSION['age'] = $person->getAge();
             $_SESSION['email'] = $person->getEmail();
-            $_SESSION['inscription'] = $person->getInscription();
+            $_SESSION['city'] = $person->getCity();
+            if ($person->getCoachId() != null){
+                $_SESSION['coach_id'] = $person->getCoachId();
+            }
+            if ($person->getPaidDate() != null){
+                $_SESSION['expire_date'] = $person->getExpireDate();
+                $_SESSION['paid_date'] = $person->getPaidDate();
+            }
             header('Location: index.php');
         } else {
             echo "<script>alert('Invalid information')</script>";
